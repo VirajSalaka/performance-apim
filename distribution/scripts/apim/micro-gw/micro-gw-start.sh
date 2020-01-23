@@ -70,8 +70,8 @@ if [[ -z $label ]]; then
     exit 1
 fi
 
-docker kill $(docker ps -a | grep vsalaka/wso2micro-gw:$micro_gw_version | awk '{print $1}')
-docker rm $(docker ps -a | grep vsalaka/wso2micro-gw:$micro_gw_version | awk '{print $1}')
+docker kill $(docker ps -a | grep vsalaka/micro-gw:$micro_gw_version | awk '{print $1}')
+docker rm $(docker ps -a | grep vsalaka/micro-gw:$micro_gw_version | awk '{print $1}')
 
 # create a separate location to keep logs
 if [ ! -d "/home/ubuntu/micro-gw-${label}" ]; then
@@ -118,8 +118,8 @@ pushd /home/ubuntu/${label}/target/
 )
 popd
 
-docker stop $(docker ps -a | grep wso2/wso2micro-gw:$micro_gw_version | awk '{print $1}')
-docker start $(docker ps -a | grep wso2/wso2micro-gw:$micro_gw_version | awk '{print $1}')
+docker stop $(docker ps -a | grep vsalaka/micro-gw:$micro_gw_version | awk '{print $1}')
+docker start $(docker ps -a | grep vsalaka/micro-gw:$micro_gw_version | awk '{print $1}')
 
 echo "Waiting for Microgateway to start"
 
