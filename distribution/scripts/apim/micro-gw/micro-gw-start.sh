@@ -23,7 +23,7 @@ label="$default_label"
 default_heap_size="512m"
 heap_size="$default_heap_size"
 #todo: set as parameter
-micro_gw_version="3.0.1"
+micro_gw_version="3.1.0"
 default_cpus="2"
 cpus="$default_cpus"
 
@@ -32,6 +32,7 @@ function usage() {
     echo "Usage: "
     echo "$0 [-m <heap_size>] [-n <label>] [-h]"
     echo "-m: The heap memory size of API Microgateway. Default: $default_heap_size."
+    echo "-c: --cpus parameter of API Microgateway (docker). Default: $default_cpus."
     echo "-n: The identifier for the built Microgateway distribution. Default: $default_label."
     echo "-h: Display this help and exit."
     echo ""
@@ -70,8 +71,8 @@ if [[ -z $label ]]; then
     exit 1
 fi
 
-docker kill $(docker ps -a | grep vsalaka/micro-gw:$micro_gw_version | awk '{print $1}')
-docker rm $(docker ps -a | grep vsalaka/micro-gw:$micro_gw_version | awk '{print $1}')
+docker kill $(docker ps -a | grep vsalaka/tmpmicro-gw:$micro_gw_version | awk '{print $1}')
+docker rm $(docker ps -a | grep vsalaka/tmpmicro-gw:$micro_gw_version | awk '{print $1}')
 
 # create a separate location to keep logs
 if [ ! -d "/home/ubuntu/micro-gw-${label}" ]; then
@@ -111,15 +112,16 @@ echo "Starting Microgateway"
 pushd /home/ubuntu/${label}/target/
 (
     set -x
-    docker run -d -v ${PWD}:/home/exec/ -v /home/ubuntu/micro-gw.conf:/home/ballerina/conf/micro-gw.conf -p 9095:9095 -p 9090:9090 -e project=${label} \
+    #todo: change the conf path after properly fixing the micro-gw.conf
+    docker run -d -v ${PWD}:/home/exec/ -v /home/ubuntu/micro-gw.conf:/home/ballerina/wso2/conf/micro-gw.conf -p 9095:9095 -p 9090:9090 -e project=${label} \
     -e JAVA_OPTS="${JAVA_OPTS}" --name="microgw" --cpus=${cpus} \
     -v /home/ubuntu/micro-gw-${label}/logs/gc.log:/home/ballerina/gc.log -v /home/ubuntu/micro-gw-${label}/runtime/heap-dump.hprof:/home/ballerina/heap-dump.hprof \
-    vsalaka/micro-gw:${micro_gw_version}
+    vsalaka/tmpmicro-gw:${micro_gw_version}
 )
 popd
 
-docker stop $(docker ps -a | grep vsalaka/micro-gw:$micro_gw_version | awk '{print $1}')
-docker start $(docker ps -a | grep vsalaka/micro-gw:$micro_gw_version | awk '{print $1}')
+docker stop $(docker ps -a | grep vsalaka/tmpmicro-gw:$micro_gw_version | awk '{print $1}')
+docker start $(docker ps -a | grep vsalaka/tmpmicro-gw:$micro_gw_version | awk '{print $1}')
 
 echo "Waiting for Microgateway to start"
 
