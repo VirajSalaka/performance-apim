@@ -40,9 +40,9 @@ function initialize() {
 export -f initialize
 
 declare -A test_scenario0=(
-    [name]="microgw-passthrough-without-oauth"
-    [display_name]="Microgateway-Passthrough-OAuth2"
-    [description]="A secured API, which directly invokes the backend through Microgateway using OAuth2 tokens"
+    [name]="microgw-passthrough-without-filters-jsonToXml"
+    [display_name]="Microgateway-without-filters-jsonToXml"
+    [description]="Only extension filter is applied. Json to Xml, and vice versa happens via the extension filter"
     [jmx]="apim-test.jmx"
     [protocol]="https"
     [path]="/echo/1.0.0"
