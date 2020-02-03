@@ -28,7 +28,7 @@ if [[ -z $netty_host ]]; then
     echo "Please provide the netty host as first arugment for create-micro-gw.sh"
     exit 1
 fi
-micro-gw init echo-mgw
+#micro-gw init echo-mgw -f
 echo "openapi: "3.0.0"
 info:
   version: 1.0.0
