@@ -45,6 +45,25 @@ paths:
       responses:
         '200':
           description: Expected response to a valid request" > echo-mgw/api_definitions/echoBasicOpenAPI.yaml
+
+echo "OpenAPI def "
+echo "openapi: "3.0.0"
+info:
+  version: 1.0.0
+  title: echo
+x-mgw-basePath: /echo/1.0.0
+x-mgw-production-endpoints:
+        urls:
+          - ${netty_host}
+paths:
+  /:
+    post:
+      summary: echos the request
+      operationId: echoRequest
+      responses:
+        '200':
+          description: Expected response to a valid request"
+
 # expect -exact "Enter Username:"
 # send -- "admin\r"
 # expect -exact "Enter Password for admin:"
