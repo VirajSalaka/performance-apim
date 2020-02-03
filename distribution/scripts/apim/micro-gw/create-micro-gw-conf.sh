@@ -64,6 +64,7 @@ tokenCacheEvictionFactor=0.25
 [analytics]
 enable=false
 uploadingTimeSpanInMillis=600000
+initialDelayInMillis=5000
 uploadingEndpoint=\"https://${host_ip}:9444/analytics/v1.0/usage/upload-file\"
 rotatingPeriod=600000
 taskUploadFiles=true
@@ -113,4 +114,4 @@ throttleEndpointbase64Header = \"admin:admin\"
     password = \"root\"
 
 [httpClients]
-  verifyHostname=false" > /home/ubuntu/micro-gw.conf
+  verifyHostname=false" > runtime-mgw/conf/micro-gw.conf

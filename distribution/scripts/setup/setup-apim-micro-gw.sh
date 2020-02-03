@@ -159,10 +159,10 @@ function setup() {
     sudo -u $os_user $script_dir/../apim/configure.sh -m $mysql_host -u $mysql_user -p $mysql_password -c $mysql_connector_file
 
     # Start API Manager
-    sudo -u $os_user $script_dir/../apim/apim-start.sh -m 2G
+    # sudo -u $os_user $script_dir/../apim/apim-start.sh -m 2G
 
     # Create APIs in Local API Manager
-    sudo -u $os_user $script_dir/../apim/create-api.sh -a localhost -n "echo" -d "Echo API" -b "http://${netty_host}:8688/"
+    # sudo -u $os_user $script_dir/../apim/create-api.sh -a localhost -n "echo" -d "Echo API" -b "http://${netty_host}:8688/"
 
     #Extract the Micro-gw zip
     echo "Extracting WSO2 API Manager Micro Gateway"
@@ -184,7 +184,8 @@ function setup() {
     micro-gw init echo-mgw -f
 
     #import Micro-GW project
-    ./apim/micro-gw/create-micro-gw.sh
+    #./apim/micro-gw/create-micro-gw.sh
+    $script_dir/../apim/micro-gw/create-micro-gw.sh -n "http://${netty_host}:8688/"
 
     #build Micro-GW
     micro-gw build echo-mgw
@@ -193,27 +194,28 @@ function setup() {
     touch /home/ubuntu/micro-gw.conf
     chmod a+rw /home/ubuntu/micro-gw.conf
 
+    #todo: fix the heap size to change dynamically
     #start Micro-GW
-    sudo -u $os_user ./apim/micro-gw/micro-gw-start.sh -m 512m -n echo-mgw -c 1
+    sudo -u $os_user ./apim/micro-gw/micro-gw-start.sh -m 512m -n echo-mgw
 
     #Generate jwt-tokens
     sudo -u $os_user ./apim/micro-gw/generate-jwt-tokens.sh -t 1000
 
     # Generate oauth2 access tokens
-    tokens_sql="$script_dir/../apim/target/tokens.sql"
-    if [[ ! -f $tokens_sql ]]; then
-        sudo -u $os_user $script_dir/../apim/generate-tokens.sh -t 4000
-    fi
+    # tokens_sql="$script_dir/../apim/target/tokens.sql"
+    # if [[ ! -f $tokens_sql ]]; then
+    #     sudo -u $os_user $script_dir/../apim/generate-tokens.sh -t 4000
+    # fi
 
-    gen_tokens_sql="$script_dir/../apim/target/tokens.sql"
-    if [[ -f $gen_tokens_sql ]]; then
-        mysql -h $mysql_host -u $mysql_user -p$mysql_password apim < $gen_tokens_sql
-    else
-        echo "SQL file with generated tokens not found."
-        exit 1
-    fi
+    # gen_tokens_sql="$script_dir/../apim/target/tokens.sql"
+    # if [[ -f $gen_tokens_sql ]]; then
+    #     mysql -h $mysql_host -u $mysql_user -p$mysql_password apim < $gen_tokens_sql
+    # else
+    #     echo "SQL file with generated tokens not found."
+    #     exit 1
+    # fi
 
-    popd
+    # popd
     echo "Completed API Micro-Gateway setup..."
 }
 export -f setup

@@ -39,22 +39,22 @@ function initialize() {
 }
 export -f initialize
 
-declare -A test_scenario0=(
-    [name]="microgw-passthrough-oauth"
-    [display_name]="Microgateway-Passthrough-OAuth2"
-    [description]="A secured API, which directly invokes the backend through Microgateway using OAuth2 tokens"
-    [jmx]="apim-test.jmx"
-    [protocol]="https"
-    [path]="/echo/1.0.0"
-    [port]="9095"
-    [use_backend]=true
-    [tokens]="$HOME/tokens.csv"
-    [skip]=false
-)
+# declare -A test_scenario0=(
+#     [name]="microgw-passthrough-oauth2"
+#     [display_name]="Microgateway-Passthrough-OAuth2"
+#     [description]="A secured API, which directly invokes the backend through Microgateway using OAuth2 tokens"
+#     [jmx]="apim-test.jmx"
+#     [protocol]="https"
+#     [path]="/echo/1.0.0"
+#     [port]="9095"
+#     [use_backend]=true
+#     [tokens]="$HOME/tokens.csv"
+#     [skip]=false
+# )
 
-declare -A test_scenario1=(
+declare -A test_scenario0=(
     [name]="microgw-passthrough-jwt"
-    [display_name]="Microgateway-Passthrough-JWT"
+    [display_name]="Microgateway-Passthrough-JWT (W/O APIM)"
     [description]="A secured API, which directly invokes the backend through Microgateway using JWT tokens"
     [jmx]="apim-test.jmx"
     [protocol]="https"
@@ -75,7 +75,7 @@ function before_execute_test_scenario() {
     jmeter_params+=("payload=$HOME/${msize}B.json" "response_size=${msize}B" "protocol=$protocol"
         "tokens=$tokens")
     echo "Starting APIM Micro-GW service"
-    ssh $apim_ssh_host "./apim/micro-gw/micro-gw-start.sh -m $heap -n echo-mgw" -c $cpus
+    ssh $apim_ssh_host "./apim/micro-gw/micro-gw-start.sh -m $heap -n echo-mgw"
 }
 
 function after_execute_test_scenario() {
