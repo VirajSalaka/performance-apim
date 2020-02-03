@@ -33,7 +33,7 @@ function initialize() {
         for jmeter_ssh_host in ${jmeter_ssh_hosts[@]}; do
             echo "Copying tokens to $jmeter_ssh_host"
             scp $HOME/jwt-tokens.csv $jmeter_ssh_host:
-            scp $HOME/tokens.csv $jmeter_ssh_host:
+            #scp $HOME/tokens.csv $jmeter_ssh_host:
         done
     fi
 }
