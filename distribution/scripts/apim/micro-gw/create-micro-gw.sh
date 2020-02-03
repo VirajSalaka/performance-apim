@@ -33,8 +33,11 @@ echo "openapi: "3.0.0"
 info:
   version: 1.0.0
   title: echo
-x-mgw-basePath: /echo/1.0.0
-x-mgw-production-endpoints:
+x-wso2-basePath: /echo/1.0.0
+x-wso2-production-endpoints:
+        urls:
+          - ${netty_host}
+x-wso2-sandbox-endpoints:
         urls:
           - ${netty_host}
 paths:
@@ -45,24 +48,6 @@ paths:
       responses:
         '200':
           description: Expected response to a valid request" > echo-mgw/api_definitions/echoBasicOpenAPI.yaml
-
-echo "OpenAPI def "
-echo "openapi: "3.0.0"
-info:
-  version: 1.0.0
-  title: echo
-x-mgw-basePath: /echo/1.0.0
-x-mgw-production-endpoints:
-        urls:
-          - ${netty_host}
-paths:
-  /:
-    post:
-      summary: echos the request
-      operationId: echoRequest
-      responses:
-        '200':
-          description: Expected response to a valid request"
 
 # expect -exact "Enter Username:"
 # send -- "admin\r"
