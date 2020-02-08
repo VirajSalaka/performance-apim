@@ -63,9 +63,6 @@ if [[ -z $label ]]; then
     exit 1
 fi
 
-unzip wso2am-micro-gw-linux-3.1.0-SNAPSHOT.zip
-mv wso2am-micro-gw-linux-3.1.0-m3-SNAPSHOT runtime-mgw
-
 if [ -e "/runtime-mgw/bin/gateway.pid" ]; then
     PID=$(cat "/runtime-mgw/bin/gateway.pid")
 fi
@@ -84,6 +81,10 @@ while true; do
         sleep 10
     fi
 done
+
+unzip wso2am-micro-gw-linux-3.1.0-SNAPSHOT.zip
+rm -rf runtime-mgw
+mv wso2am-micro-gw-linux-3.1.0-m3-SNAPSHOT runtime-mgw
 
 # create a separate location to keep logs
 if [ ! -d "/home/ubuntu/micro-gw-${label}" ]; then
