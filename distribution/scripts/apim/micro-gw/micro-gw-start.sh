@@ -63,11 +63,8 @@ if [[ -z $label ]]; then
     exit 1
 fi
 
-#fix the download link
-wget https://rajith-mgw-bucket.s3.amazonaws.com/wso2am-micro-gw-linux-3.1.0-m3-SNAPSHOT.zip -O wso2am-micro-gw-linux-3.1.0-SNAPSHOT.zip
-
 unzip wso2am-micro-gw-linux-3.1.0-SNAPSHOT.zip
-mv wso2am-micro-gw-linux-3.1.0-SNAPSHOT runtime-mgw
+mv wso2am-micro-gw-linux-3.1.0-m3-SNAPSHOT runtime-mgw
 
 if [ -e "/runtime-mgw/bin/gateway.pid" ]; then
     PID=$(cat "/runtime-mgw/bin/gateway.pid")
