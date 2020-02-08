@@ -64,7 +64,7 @@ if [[ -z $label ]]; then
 fi
 
 #fix the download link
-wget https://www.dropbox.com/s/u1imdpf12zxtbtt/wso2am-micro-gw-linux-3.1.0-SNAPSHOT.zip?dl=0 -O wso2am-micro-gw-linux-3.1.0-SNAPSHOT.zip
+wget https://rajith-mgw-bucket.s3.amazonaws.com/wso2am-micro-gw-linux-3.1.0-m3-SNAPSHOT.zip -O wso2am-micro-gw-linux-3.1.0-SNAPSHOT.zip
 
 unzip wso2am-micro-gw-linux-3.1.0-SNAPSHOT.zip
 mv wso2am-micro-gw-linux-3.1.0-SNAPSHOT runtime-mgw
