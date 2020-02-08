@@ -28,9 +28,9 @@ echo "[listenerConfig]
 host=\"0.0.0.0\"
 httpPort=9090
 httpsPort=9095
-keyStorePath=\"\${mgw-runtime.home}/runtime/bre/security/ballerinaKeystore.p12\"
+keyStorePath=\"\${ballerina.home}/bre/security/ballerinaKeystore.p12\"
 keyStorePassword=\"ballerina\"
-trustStorePath=\"\${mgw-runtime.home}/runtime/bre/security/ballerinaTruststore.p12\"
+trustStorePath=\"\${ballerina.home}/bre/security/ballerinaTruststore.p12\"
 trustStorePassword=\"ballerina\"
 tokenListenerPort=9096
 
