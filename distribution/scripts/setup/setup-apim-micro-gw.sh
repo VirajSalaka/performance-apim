@@ -195,7 +195,7 @@ function setup() {
     chmod a+rw /home/ubuntu/micro-gw.conf
 
     #fix the download link
-    wget https://github.com/wso2/product-microgateway/releases/download/v3.1.0-beta/wso2am-micro-gw-linux-3.1.0-beta.zip -O wso2am-micro-gw-linux-3.1.0-SNAPSHOT.zip
+    wget https://github.com/wso2/product-microgateway/releases/download/v3.1.0-beta/wso2am-micro-gw-linux-3.1.0-beta.zip -O wso2am-micro-gw-linux-3.1.0-beta.zip
 
     #todo: fix the heap size to change dynamically
     #start Micro-GW

@@ -82,9 +82,9 @@ while true; do
     fi
 done
 
-unzip wso2am-micro-gw-linux-3.1.0-SNAPSHOT.zip
+unzip wso2am-micro-gw-linux-3.1.0-beta.zip
 rm -rf runtime-mgw
-mv wso2am-micro-gw-linux-3.1.0-m3-SNAPSHOT runtime-mgw
+mv wso2am-micro-gw-linux-3.1.0-beta runtime-mgw
 
 # create a separate location to keep logs
 if [ ! -d "/home/ubuntu/micro-gw-${label}" ]; then
