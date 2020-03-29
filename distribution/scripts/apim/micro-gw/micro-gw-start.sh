@@ -84,7 +84,7 @@ done
 
 unzip wso2am-micro-gw-linux-3.1.0-rc2.zip
 rm -rf runtime-mgw
-mv wso2am-micro-gw-linux-3.1.0-rc2.zip runtime-mgw
+mv wso2am-micro-gw-linux-3.1.0 runtime-mgw
 
 # create a separate location to keep logs
 if [ ! -d "/home/ubuntu/micro-gw-${label}" ]; then
