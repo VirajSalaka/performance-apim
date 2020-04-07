@@ -28,9 +28,9 @@ echo "[listenerConfig]
 host=\"0.0.0.0\"
 httpPort=9090
 httpsPort=9095
-keyStorePath=\"\${mgw-runtime.home}/runtime/bre/security/ballerinaKeystore.p12\"
+keyStorePath=\"\${ballerina.home}/bre/security/ballerinaKeystore.p12\"
 keyStorePassword=\"ballerina\"
-trustStorePath=\"\${mgw-runtime.home}/runtime/bre/security/ballerinaTruststore.p12\"
+trustStorePath=\"\${ballerina.home}/bre/security/ballerinaTruststore.p12\"
 trustStorePassword=\"ballerina\"
 tokenListenerPort=9096
 
@@ -45,12 +45,10 @@ password=\"admin\"
 tokenContext=\"oauth2\"
 timestampSkew=5000
 
-
 [jwtTokenConfig]
 issuer=\"https://localhost:9443/oauth2/token\"
 audience=\"http://org.wso2.apimgt/gateway\"
 certificateAlias=\"wso2apim\"
-
 
 [jwtConfig]
 header=\"X-JWT-Assertion\"
@@ -64,6 +62,7 @@ tokenCacheEvictionFactor=0.25
 [analytics]
 enable=false
 uploadingTimeSpanInMillis=600000
+initialDelayInMillis=5000
 uploadingEndpoint=\"https://${host_ip}:9444/analytics/v1.0/usage/upload-file\"
 rotatingPeriod=600000
 taskUploadFiles=true
@@ -87,7 +86,6 @@ sslVerifyClient=\"optional\"
 enableRequestValidation = false
 enableResponseValidation = false
 
-
 [throttlingConfig]
 enabledGlobalTMEventPublishing = false
 jmsConnectioninitialContextFactory = \"bmbInitialContextFactory\"
@@ -96,7 +94,6 @@ jmsConnectionUsername = ""
 jmsConnectionPassword = ""
 throttleEndpointUrl = \"https://${host_ip}:9443/endpoints\"
 throttleEndpointbase64Header = \"admin:admin\"
-
 [tokenRevocationConfig]
   [tokenRevocationConfig.realtime]
     enableRealtimeMessageRetrieval = false
@@ -113,4 +110,4 @@ throttleEndpointbase64Header = \"admin:admin\"
     password = \"root\"
 
 [httpClients]
-  verifyHostname=false" > /home/ubuntu/micro-gw.conf
+  verifyHostname=false" > runtime-mgw/conf/micro-gw.conf

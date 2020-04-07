@@ -71,8 +71,8 @@ if [[ -z $label ]]; then
     exit 1
 fi
 
-docker kill $(docker ps -a | grep vsalaka/tmpmicro-gw:$micro_gw_version | awk '{print $1}')
-docker rm $(docker ps -a | grep vsalaka/tmpmicro-gw:$micro_gw_version | awk '{print $1}')
+docker kill $(docker ps -a | grep wso2/wso2micro-gw:$micro_gw_version | awk '{print $1}')
+docker rm $(docker ps -a | grep wso2/wso2micro-gw:$micro_gw_version | awk '{print $1}')
 
 # create a separate location to keep logs
 if [ ! -d "/home/ubuntu/micro-gw-${label}" ]; then
@@ -116,12 +116,12 @@ pushd /home/ubuntu/${label}/target/
     docker run -d -v ${PWD}:/home/exec/ -v /home/ubuntu/micro-gw.conf:/home/ballerina/wso2/conf/micro-gw.conf -p 9095:9095 -p 9090:9090 -e project=${label} \
     -e JAVA_OPTS="${JAVA_OPTS}" --name="microgw" --cpus=${cpus} \
     -v /home/ubuntu/micro-gw-${label}/logs/gc.log:/home/ballerina/gc.log -v /home/ubuntu/micro-gw-${label}/runtime/heap-dump.hprof:/home/ballerina/heap-dump.hprof \
-    vsalaka/tmpmicro-gw:${micro_gw_version}
+    wso2/wso2micro-gw:${micro_gw_version}
 )
 popd
 
-docker stop $(docker ps -a | grep vsalaka/tmpmicro-gw:$micro_gw_version | awk '{print $1}')
-docker start $(docker ps -a | grep vsalaka/tmpmicro-gw:$micro_gw_version | awk '{print $1}')
+docker stop $(docker ps -a | grep wso2/wso2micro-gw:$micro_gw_version | awk '{print $1}')
+docker start $(docker ps -a | grep wso2/wso2micro-gw:$micro_gw_version | awk '{print $1}')
 
 echo "Waiting for Microgateway to start"
 

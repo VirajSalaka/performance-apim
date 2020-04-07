@@ -171,6 +171,10 @@ function setup() {
     sudo -u $os_user mv -v $mgw_dirname micro-gw
     echo "Micro Gateway is extracted"
 
+    #todo: change the scripts to support APIM latest version
+    #Copy toolkit-config.toml file to support APIM 2.6.0
+    cp $script_dir/../apim/micro-gw/toolkit-config.toml $PWD/micro-gw/conf/toolkit-config.toml
+
     jvm_dir=""
     for dir in /usr/lib/jvm/jdk1.8*; do
         [ -d "${dir}" ] && jvm_dir="${dir}" && break
