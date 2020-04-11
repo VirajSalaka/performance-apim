@@ -110,4 +110,4 @@ throttleEndpointbase64Header = \"admin:admin\"
     password = \"root\"
 
 [httpClients]
-  verifyHostname=false" > runtime-mgw/conf/micro-gw.conf
+  verifyHostname=false" > micro-gw.conf
