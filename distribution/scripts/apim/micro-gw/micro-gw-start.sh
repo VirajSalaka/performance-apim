@@ -113,7 +113,7 @@ pushd /home/ubuntu/${label}/target/
 (
     set -x
     #todo: change the conf path after properly fixing the micro-gw.conf
-    docker run -d -v ${PWD}:/home/exec/ -v /home/ubuntu/micro-gw.conf:/home/ballerina/wso2/conf/micro-gw.conf -p 9095:9095 -p 9090:9090 -e project=${label} \
+    docker run -d -v ${PWD}:/home/exec/ -v /home/ubuntu/micro-gw.conf:/home/ballerina/conf/micro-gw.conf -p 9095:9095 -p 9090:9090 -e project=${label} \
     -e JAVA_OPTS="${JAVA_OPTS}" --name="microgw" --cpus=${cpus} \
     -v /home/ubuntu/micro-gw-${label}/logs/gc.log:/home/ballerina/gc.log -v /home/ubuntu/micro-gw-${label}/runtime/heap-dump.hprof:/home/ballerina/heap-dump.hprof \
     wso2/wso2micro-gw:${micro_gw_version}
