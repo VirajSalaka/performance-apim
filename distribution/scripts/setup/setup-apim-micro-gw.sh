@@ -159,7 +159,7 @@ function setup() {
     sudo -u $os_user $script_dir/../apim/configure.sh -m $mysql_host -u $mysql_user -p $mysql_password -c $mysql_connector_file
 
     # Start API Manager
-    sudo -u $os_user $script_dir/../apim/apim-start.sh -m 2G
+    sudo -u $os_user $script_dir/../apim/apim-start.sh -m 1G
 
     # Create APIs in Local API Manager
     sudo -u $os_user $script_dir/../apim/create-api.sh -a localhost -n "echo" -d "Echo API" -b "http://${netty_host}:8688/"
@@ -201,8 +201,7 @@ function setup() {
     sudo -u $os_user ./apim/micro-gw/micro-gw-start.sh -m 512m -n echo-mgw -c 1
 
     #Generate jwt-tokens
-    set -x
-    sudo -u $os_user ./apim/micro-gw/generate-jwt-tokens.sh -t 1000 -a jwt-tokens.csv
+    sudo -u $os_user ./apim/generate-jwt-tokens.sh -t 1000 -a jwt-tokens.csv
 
     # Generate oauth2 access tokens
     tokens_sql="$script_dir/../apim/target/tokens.sql"
