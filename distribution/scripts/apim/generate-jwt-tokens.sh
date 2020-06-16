@@ -31,12 +31,12 @@ function usage() {
     echo ""
 }
 
-while getopts "t:ho:" opt; do
+while getopts "t:a:h" opt; do
     case "${opt}" in
     t)
         tokens_count=${OPTARG}
         ;;
-    o)
+    a)
         tokens_file_name=${OPTARG}
         ;;    
     h)
