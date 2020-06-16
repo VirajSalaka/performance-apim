@@ -201,7 +201,7 @@ function setup() {
     sudo -u $os_user ./apim/micro-gw/micro-gw-start.sh -m 512m -n echo-mgw -c 1
 
     #Generate jwt-tokens
-    sudo -u $os_user ./apim/micro-gw/generate-jwt-tokens.sh -t 1000
+    sudo -u $os_user ./apim/micro-gw/generate-jwt-tokens.sh -t 1000 -o jwt-tokens.csv
 
     # Generate oauth2 access tokens
     tokens_sql="$script_dir/../apim/target/tokens.sql"
