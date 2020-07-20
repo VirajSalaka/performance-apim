@@ -201,21 +201,21 @@ function setup() {
     sudo -u $os_user ./apim/micro-gw/micro-gw-start.sh -m 512m -n echo-mgw -c 1
 
     #Generate jwt-tokens
-    sudo -u $os_user ./apim/generate-jwt-tokens.sh -t 1000 -a jwt-tokens.csv
+    sudo -u $os_user ./apim/generate-jwt-tokens.sh -t 4000 -a jwt-tokens.csv
 
-    # Generate oauth2 access tokens
-    tokens_sql="$script_dir/../apim/target/tokens.sql"
-    if [[ ! -f $tokens_sql ]]; then
-        sudo -u $os_user $script_dir/../apim/generate-tokens.sh -t 4000
-    fi
+    # Generate oauth2 access tokens  
+    # tokens_sql="$script_dir/../apim/target/tokens.sql"
+    # if [[ ! -f $tokens_sql ]]; then
+    #     sudo -u $os_user $script_dir/../apim/generate-tokens.sh -t 4000
+    # fi
 
-    gen_tokens_sql="$script_dir/../apim/target/tokens.sql"
-    if [[ -f $gen_tokens_sql ]]; then
-        mysql -h $mysql_host -u $mysql_user -p$mysql_password apim < $gen_tokens_sql
-    else
-        echo "SQL file with generated tokens not found."
-        exit 1
-    fi
+    # gen_tokens_sql="$script_dir/../apim/target/tokens.sql"
+    # if [[ -f $gen_tokens_sql ]]; then
+    #     mysql -h $mysql_host -u $mysql_user -p$mysql_password apim < $gen_tokens_sql
+    # else
+    #     echo "SQL file with generated tokens not found."
+    #     exit 1
+    # fi
 
     popd
     echo "Completed API Micro-Gateway setup..."

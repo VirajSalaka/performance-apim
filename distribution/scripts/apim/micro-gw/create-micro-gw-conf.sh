@@ -34,80 +34,60 @@ trustStorePath=\"\${ballerina.home}/bre/security/ballerinaTruststore.p12\"
 trustStorePassword=\"ballerina\"
 tokenListenerPort=9096
 
-[authConfig]
-authorizationHeader=\"Authorization\"
-removeAuthHeaderFromOutMessage=true
-
 [keyManager]
-serverUrl=\"https://${host_ip}:9443\"
-username=\"admin\"
-password=\"admin\"
-tokenContext=\"oauth2\"
-timestampSkew=5000
+  serverUrl = \"https://${host_ip}:9443\"
+  tokenContext = \"oauth2\"
+  external = false
+  [keymanager.security.basic]
+    enabled = true
+    username = \"admin\"
+    password = \"admin\"
 
-[jwtTokenConfig]
-issuer=\"https://localhost:9443/oauth2/token\"
-audience=\"http://org.wso2.apimgt/gateway\"
-certificateAlias=\"wso2apim310\"
-
-[jwtConfig]
-header=\"X-JWT-Assertion\"
-
-[caching]
-enabled=true
-tokenCacheExpiryTime=900000
-tokenCacheCapacity=10000
-tokenCacheEvictionFactor=0.25
+[[jwtTokenConfig]]
+  issuer = \"https://localhost:9443/oauth2/token\"
+  certificateAlias = \"wso2apim310\"
+  validateSubscription = true
+  consumerKeyClaim = \"aud\"
 
 [analytics]
-enable=false
-uploadingTimeSpanInMillis=600000
-initialDelayInMillis=5000
-uploadingEndpoint=\"https://${host_ip}:9444/analytics/v1.0/usage/upload-file\"
-rotatingPeriod=600000
-taskUploadFiles=true
-username=\"admin\"
-password=\"admin\"
+  [analytics.fileUpload]
+    enable = false
 
-[http2]
-enable=false
-
-[mutualSSLConfig]
-protocolName=\"TLS\"
-protocolVersions=\"TLSv1.2,TLSv1.1\"
-ciphers=\"TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA,TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256, TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256,TLS_RSA_WITH_AES_128_CBC_SHA256,TLS_ECDH_ECDSA_WITH_AES_128_CBC_SHA256, TLS_ECDH_RSA_WITH_AES_128_CBC_SHA256,TLS_DHE_RSA_WITH_AES_128_CBC_SHA256,TLS_DHE_DSS_WITH_AES_128_CBC_SHA256, TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA,TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA,TLS_RSA_WITH_AES_128_CBC_SHA, TLS_ECDH_ECDSA_WITH_AES_128_CBC_SHA,TLS_ECDH_RSA_WITH_AES_128_CBC_SHA,TLS_DHE_RSA_WITH_AES_128_CBC_SHA, TLS_DHE_DSS_WITH_AES_128_CBC_SHA,TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256  ,TLS_RSA_WITH_AES_128_GCM_SHA256,TLS_ECDH_ECDSA_WITH_AES_128_GCM_SHA256,TLS_ECDH_RSA_WITH_AES_128_GCM_SHA256, TLS_DHE_RSA_WITH_AES_128_GCM_SHA256,TLS_DHE_RSA_WITH_AES_128_GCM_SHA256,TLS_DHE_DSS_WITH_AES_128_GCM_SHA256  ,TLS_ECDHE_ECDSA_WITH_3DES_EDE_CBC_SHA,TLS_ECDHE_RSA_WITH_3DES_EDE_CBC_SHA,SSL_RSA_WITH_3DES_EDE_CBC_SHA, TLS_ECDH_ECDSA_WITH_3DES_EDE_CBC_SHA,TLS_ECDH_RSA_WITH_3DES_EDE_CBC_SHA,SSL_DHE_RSA_WITH_3DES_EDE_CBC_SHA, SSL_DHE_DSS_WITH_3DES_EDE_CBC_SHA,TLS_EMPTY_RENEGOTIATION_INFO_SCSV\"
-sslVerifyClient=\"optional\"
-
-#[b7a.users]
-#[b7a.users.generalUser1]
-#password=\"5BAA61E4C9B93F3F0682250B6CF8331B7EE68FD8\"
-
-[validationConfig]
-enableRequestValidation = false
-enableResponseValidation = false
-
-[throttlingConfig]
-enabledGlobalTMEventPublishing = false
-jmsConnectioninitialContextFactory = \"bmbInitialContextFactory\"
-jmsConnectionProviderUrl= \"amqp://admin:admin@carbon/carbon?brokerlist='tcp://${host_ip}:5672'\"
-jmsConnectionUsername = ""
-jmsConnectionPassword = ""
-throttleEndpointUrl = \"https://${host_ip}:9443/endpoints\"
-throttleEndpointbase64Header = \"admin:admin\"
-[tokenRevocationConfig]
-  [tokenRevocationConfig.realtime]
-    enableRealtimeMessageRetrieval = false
-    jmsConnectionTopic = \"tokenRevocation\"
-    jmsConnectioninitialContextFactory = \"bmbInitialContextFactory\"
-    jmsConnectionProviderUrl= \"amqp://admin:admin@carbon/carbon?brokerlist='tcp://${host_ip}:5672'\"
-    jmsConnectionUsername = \"\"
-    jmsConnectionPassword = \"\"
-  [tokenRevocationConfig.persistent]
-    enablePersistentStorageRetrieval = false
-    useDefault = true
-    hostname = \"https://127.0.0.1:2379/v2/keys/jti/\"
-    username = \"root\"
-    password = \"root\"
+[b7a.users]
+  [b7a.users.admin]
+    password = \"d033e22ae348aeb5660fc2140aec35850c4da997\"
 
 [httpClients]
-  verifyHostname=false" > micro-gw.conf
+  verifyHostname = true
+
+[apikey.issuer]
+  [apikey.issuer.tokenConfig]
+    enabled = true
+    issuer = \"https://localhost:9095/apikey\"
+    certificateAlias = \"ballerina\"
+    validityTime = -1
+
+# Throttling configurations
+[throttlingConfig]
+  enabledGlobalTMEventPublishing = false
+  jmsConnectionProviderUrl = \"amqp://admin:admin@carbon/carbon?brokerlist='tcp://${host_ip}:5672'\"
+  # Throttling configurations related to event publishing using a binary connection
+  [throttlingConfig.binary]
+    enabled = true
+    [[throttlingConfig.binary.URLGroup]]
+      receiverURL = \"tcp://${host_ip}:9611\"
+      authURL = \"ssl://${host_ip}:9711\"
+
+[apim.eventHub]
+  enable = true
+  service_url = \"https://${host_ip}:9443\"
+  internalDataContext=\"/internal/data/v1/\"
+  username=\"admin\"
+  password=\"admin\"
+  eventListeningEndpoints = \"amqp://admin:admin@carbon/carbon?brokerlist='tcp://${host_ip}:5672'\"
+
+[httpClients]
+  verifyHostname=false
+
+[security]
+  validateSubscriptions = false" > micro-gw.conf
