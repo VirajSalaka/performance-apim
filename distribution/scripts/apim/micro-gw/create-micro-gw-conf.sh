@@ -58,7 +58,7 @@ tokenListenerPort=9096
     password = \"d033e22ae348aeb5660fc2140aec35850c4da997\"
 
 [httpClients]
-  verifyHostname = true
+  verifyHostname = false
 
 [apikey.issuer]
   [apikey.issuer.tokenConfig]
@@ -85,9 +85,6 @@ tokenListenerPort=9096
   username=\"admin\"
   password=\"admin\"
   eventListeningEndpoints = \"amqp://admin:admin@carbon/carbon?brokerlist='tcp://${host_ip}:5672'\"
-
-[httpClients]
-  verifyHostname=false
 
 [security]
   validateSubscriptions = false" > micro-gw.conf
