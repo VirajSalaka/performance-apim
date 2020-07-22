@@ -80,11 +80,11 @@ tokenListenerPort=9096
 
 [apim.eventHub]
   enable = true
-  service_url = \"https://${host_ip}:9443\"
+  serviceUrl = \"https://${host_ip}:9443\"
   internalDataContext=\"/internal/data/v1/\"
   username=\"admin\"
   password=\"admin\"
   eventListeningEndpoints = \"amqp://admin:admin@carbon/carbon?brokerlist='tcp://${host_ip}:5672'\"
 
 [security]
-  validateSubscriptions = false" > micro-gw.conf
+  validateSubscriptions = true" > micro-gw.conf
