@@ -46,7 +46,7 @@ tokenListenerPort=9096
 [[jwtTokenConfig]]
   issuer = \"https://localhost:9443/oauth2/token\"
   certificateAlias = \"wso2apim310\"
-  validateSubscription = true
+  validateSubscription = false
   consumerKeyClaim = \"aud\"
 
 [analytics]
@@ -79,7 +79,7 @@ tokenListenerPort=9096
       authURL = \"ssl://${host_ip}:9711\"
 
 [apim.eventHub]
-  enable = true
+  enable = false
   serviceUrl = \"https://${host_ip}:9443\"
   internalDataContext=\"/internal/data/v1/\"
   username=\"admin\"
@@ -87,4 +87,4 @@ tokenListenerPort=9096
   eventListeningEndpoints = \"amqp://admin:admin@carbon/carbon?brokerlist='tcp://${host_ip}:5672'\"
 
 [security]
-  validateSubscriptions = true" > micro-gw.conf
+  validateSubscriptions = false" > micro-gw.conf
