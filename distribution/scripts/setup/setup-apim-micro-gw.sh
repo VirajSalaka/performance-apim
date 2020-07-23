@@ -187,6 +187,10 @@ function setup() {
     #initialize Micro-GW project
     micro-gw init echo-mgw -f
 
+    #Copy the policies.yaml with changed default throttle policy
+    rm echo-mgw/policies.yaml
+    cp apim/micro-gw/policies.yaml echo-mgw/policies.yaml
+
     #import Micro-GW project
     ./apim/micro-gw/create-micro-gw.sh
 
