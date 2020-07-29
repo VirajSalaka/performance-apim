@@ -115,8 +115,7 @@ chmod -R a+rw /home/ubuntu/micro-gw-${label}
 
 echo "Enabling GC Logs"
 export JAVA_OPTS="-Xms${heap_size} -Xmx${heap_size} -XX:+PrintGC -XX:+PrintGCDetails -XX:+PrintGCDateStamps -Xloggc:/home/ubuntu/micro-gw-${label}/logs/gc.log"
-# JAVA_OPTS+=" -XX:+UnlockCommercialFeatures -XX:+FlightRecorder -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath="/home/ubuntu/micro-gw-${label}/runtime/heap-dump.hprof" -XX:StartFlightRecording=delay=120s,duration=10m,name=Profiling,filename=/home/ubuntu/runtime-mgw/logs/recording.jfr,settings=profile"
-JAVA_OPTS+=" -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath="/home/ubuntu/micro-gw-${label}/runtime/heap-dump.hprof""
+JAVA_OPTS+=" -XX:+UnlockCommercialFeatures -XX:+FlightRecorder -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath="/home/ubuntu/micro-gw-${label}/runtime/heap-dump.hprof" -XX:StartFlightRecording=delay=120s,duration=10m,name=Profiling,filename=/home/ubuntu/runtime-mgw/logs/recording.jfr,settings=profile"
 
 jvm_dir=""
 for dir in /usr/lib/jvm/jdk1.8*; do
