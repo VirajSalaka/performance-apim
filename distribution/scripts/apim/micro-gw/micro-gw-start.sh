@@ -140,10 +140,12 @@ echo "Starting Microgateway"
 # )
 # popd
 
+sudo chmod a+x /home/ubuntu/apim/thread_dump/thread-analyze.sh
+
 pushd runtime-mgw/bin
 (
     chmod a+x gateway
-    bash gateway /home/ubuntu/${label}/target/${label}.jar >/dev/null &
+    bash gateway /home/ubuntu/${label}/target/${label}.jar --b7a.log.level=DEBUG --b7a.http.tracelog.console=true >/dev/null &
 )
 popd
 
@@ -161,4 +163,8 @@ done
 
 # Wait for another 5 seconds to make sure that the server is ready to accept API requests.
 sleep 5
+
+gatewayPID=$(pgrep -f ballerina)
+sh /home/ubuntu/apim/thread_dump/thread-analyze.sh $gatewayPID 30 20s
+
 exit $exit_status
