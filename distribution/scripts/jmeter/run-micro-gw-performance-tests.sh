@@ -85,9 +85,6 @@ function after_execute_test_scenario() {
     download_file $apim_ssh_host runtime-mgw/logs/microgateway.log microgateway.log
     download_file $apim_ssh_host micro-gw-echo-mgw/logs/gc.log apim_gc.log
     download_file $apim_ssh_host micro-gw-echo-mgw/runtime/heap-dump.hprof apim_heap_dump.hprof
-
-    mkdir ${report_location}/thread_dumps
-    download_file $apim_ssh_host apim/thread_dump/*.txt thread_dumps
     # download_file $apim_ssh_host runtime-mgw/logs/recording.jfr recording.jfr
 }
 
