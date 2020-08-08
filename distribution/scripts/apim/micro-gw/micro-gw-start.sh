@@ -143,7 +143,7 @@ echo "Starting Microgateway"
 pushd runtime-mgw/bin
 (
     chmod a+x gateway
-    export BALLERINA_MAX_POOL_SIZE=100
+    export BALLERINA_MAX_POOL_SIZE=400
     bash gateway /home/ubuntu/${label}/target/${label}.jar >/dev/null &
 )
 popd
