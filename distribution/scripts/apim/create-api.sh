@@ -271,7 +271,6 @@ api_create_request() {
       { 
          "target":"/*",
          "verb":"POST",
-          "authType": "None",
          "throttlingPolicy":"Unlimited"
       }
    ]

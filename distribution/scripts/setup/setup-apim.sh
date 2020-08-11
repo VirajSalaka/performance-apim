@@ -168,10 +168,6 @@ function setup() {
     # Configure WSO2 API Manager
     sudo -u $os_user $script_dir/../apim/configure.sh -m $mysql_host -u $mysql_user -p $mysql_password -c $mysql_connector_file
 
-    # Copy the unauthenticated sidhdhi file
-    sudo -u $os_user rm wso2am/repository/deployment/server/executionplans/carbon.super_sub_Unauthenticated.siddhiql
-    sudo -u $os_user cp $script_dir/../apim/conf/carbon.super_sub_Unauthenticated.siddhiql wso2am/repository/deployment/server/executionplans/carbon.super_sub_Unauthenticated.siddhiql
-
     # Start API Manager
     sudo -u $os_user $script_dir/../apim/apim-start.sh -m 1G
 
