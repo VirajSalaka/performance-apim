@@ -141,7 +141,7 @@ echo "Starting Microgateway"
 # popd
 
 NUMBER_OF_CORES=$(nproc --all) 
-MULTIPLY_FACTOR=8
+MULTIPLY_FACTOR=16
 
 export BALLERINA_MAX_POOL_SIZE=$(($NUMBER_OF_CORES * $MULTIPLY_FACTOR))
 
