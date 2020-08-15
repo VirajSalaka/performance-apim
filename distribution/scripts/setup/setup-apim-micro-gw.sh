@@ -202,7 +202,7 @@ function setup() {
     chmod a+rw /home/ubuntu/micro-gw.conf
 
     # Download microgateway Runtime
-    wget -O wso2am-micro-gw-linux-3.2.0-beta.zip https://github.com/wso2/product-microgateway/releases/download/v3.2.0-beta/wso2am-micro-gw-linux-3.2.0-beta.zip
+    # wget -O wso2am-micro-gw-linux-3.2.0-beta.zip https://github.com/wso2/product-microgateway/releases/download/v3.2.0-beta/wso2am-micro-gw-linux-3.2.0-beta.zip
 
     #start Micro-GW
     sudo -u $os_user ./apim/micro-gw/micro-gw-start.sh -m 512m -n echo-mgw -c 1
